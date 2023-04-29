@@ -59,6 +59,7 @@ public class Expendedor {
         int vuelto = 0;
 
         if (peseta == null) {
+            throw new PagoIncorrectoException("No se recibió el pago.");
             return null;
         }
 
@@ -68,28 +69,28 @@ public class Expendedor {
                     vuelto = peseta.getValor() - precio;
                     ret = depCoca.getItem();
                     break;
-                }
+                }else throw new PagoInsuficienteException("El pago efectuado no es suficiente.");
             }
             case 2: {
                 if (peseta.getValor() >= precio) {
                     vuelto = peseta.getValor() - precio;
                     ret = depSprite.getItem ();
                     break;
-                }
+                }else throw new PagoInsuficienteException("El pago efectuado no es suficiente.");
             }
             case 3: {
                 if (peseta.getValor() >= precio) {
                     vuelto = peseta.getValor() - precio;
                     ret = depSnick.getItem();
                     break;
-                }
+                }else throw new PagoInsuficienteException("El pago efectuado no es suficiente.");
             }
             case 4: {
                 if (peseta.getValor() >= precio) {
                     vuelto = peseta.getValor() - precio;
                     ret = depSup8.getItem();
                     break;
-                }
+                }else throw new PagoInsuficienteException("El pago efectuado no es suficiente.");
             }
         }
         if (ret != null) {
@@ -100,6 +101,7 @@ public class Expendedor {
             peseta = null;
         } else {
             depVuelto.addItem(peseta);
+            throw new NoHayBebidaException("No hay stock del producto seleccionado.");
         }
         return ret;
     }
