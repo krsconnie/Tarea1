@@ -54,7 +54,7 @@ public class Expendedor {
      * @param cual, el tipo de producto a comprar
      * @return  ret
      */
-    public Producto comprarProducto(Moneda peseta, int cual) {
+    public Producto comprarProducto(Moneda peseta, int cual) throws PagoIncorrectoException, PagoInsuficienteException, NoHayBebidaException {
         Producto ret = null;
         int vuelto = 0;
 
