@@ -28,7 +28,7 @@ public class Tarea1_PrograII {
             
         }catch (PagoIncorrectoException e){
 
-          e.printStrackTrace(System.out);
+          e.printStackTrace(System.out);
           System.out.println("No se recibió el pago");
 
         }
