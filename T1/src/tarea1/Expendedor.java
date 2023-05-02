@@ -59,9 +59,7 @@ public class Expendedor {
         int vuelto = 0;
 
         if (peseta == null) {
-
             throw new PagoIncorrectoException("No se recibió el pago.");
-            
         }
 
         switch (cual) {
@@ -102,7 +100,7 @@ public class Expendedor {
             peseta = null;
         } else {
             depVuelto.addItem(peseta);
-            throw new NoHayBebidaException("No hay stock del producto seleccionado.");
+            throw new NoHayProductoException("No hay stock del producto seleccionado.");
         }
         return ret;
     }
