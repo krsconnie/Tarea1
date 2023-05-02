@@ -1,5 +1,8 @@
 package tarea1;
 
+import javax.print.event.PrintEvent;
+import javax.sound.sampled.SourceDataLine;
+
 /**
  * Clase comprador que crea una entidad "comprador" que tendrá una moneda con la que
  * comprará un cierto producto en un expendedor
@@ -20,12 +23,15 @@ public class Comprador {
      * @param CualProducto que escoge que tipo de producto ( que tipo de Bebida o Dulce)
      * @param maquina el expendedor en el que se compra
      */
-    public Comprador(Moneda m, int CualProducto, Expendedor maquina) {
+    public Comprador(Moneda m, int CualProducto, Expendedor maquina) throws PagoIncorrectoException{
         vuelto = 0;
 
         Producto paquete;
-
-        paquete = maquina.comprarProducto(m,CualProducto);
+        if (m == null){
+            throw new PagoIncorrectoException("No se recibió el pago");
+        }
+        try {
+            paquete = maquina.comprarProducto(m,CualProducto);
 
         while (true) {
             Moneda devuelve = maquina.getVuelto();
@@ -39,6 +45,14 @@ public class Comprador {
         if (paquete != null) {
             consumir = paquete.consumir();
         }
+        } catch (PagoInsuficienteException e) {
+            //e.printStackTrace(System.out);
+            System.out.println("El pago efectuado no es suficiente");
+        } catch (NoHayProductoException e) {
+            //e.printStackTrace(System.out);
+            System.out.println("No hay producto");
+        }
+        
     }
     /**
      * Método que permite saber el vuelto resultante
